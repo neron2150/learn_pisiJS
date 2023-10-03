@@ -45,10 +45,10 @@ const gameStart = () => {
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
-      bunnyAccelerator.setVelocityX(-0.2);
+      bunnyAccelerator.setSpeedX(-2);
     }
     if (e.key === "ArrowRight") {
-      bunnyAccelerator.setVelocityX(0.2);
+      bunnyAccelerator.setSpeedX(2);
     }
     if (e.key == " " || e.code == "Space") {
       app.stage = gameStage;
@@ -60,9 +60,9 @@ const gameStart = () => {
   gameOverStage.eventMode = "static";
   app.stage.on("pointerdown", (e) => {
     if (e.screenX < app.renderer.width / 2) {
-      bunnyAccelerator.setVelocityX(-0.2);
+      bunnyAccelerator.setSpeedX(-2);
     } else {
-      bunnyAccelerator.setVelocityX(0.2);
+      bunnyAccelerator.setSpeedX(2);
     }
   });
   gameOverStage.on("pointerdown", () => {

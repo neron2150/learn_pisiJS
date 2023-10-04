@@ -5,14 +5,20 @@ import { sound } from "@pixi/sound";
 const app = new Application({ resizeTo: window });
 
 document.body.appendChild(app.view as unknown as Node);
-function toggleFullScreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else if (document.exitFullscreen) {
-    document.exitFullscreen();
+
+var elem = app.renderer.view;
+function openFullscreen() {
+  if (elem?.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem?.requestFullscreen) {
+    /* Safari */
+    elem?.requestFullscreen();
+  } else if ((elem as any)?.msRequestFullscreen) {
+    /* IE11 */
+    (elem as any).requestFullscreen();
   }
 }
-toggleFullScreen();
+openFullscreen();
 let speed = 1;
 let bunnyAccelerator: any = null;
 let bg_layer1: any = null;
@@ -30,6 +36,7 @@ const loadAssets = async () => {
   carrotTexture = await Assets.load("assets/carrot.png");
   ground_grass = await Assets.load("assets/ground_grass.png");
 
+  openFullscreen();
   app.ticker.start();
 };
 const gameStart = () => {
@@ -67,6 +74,8 @@ const gameStart = () => {
   app.stage.eventMode = "static";
   gameOverStage.eventMode = "static";
   app.stage.on("pointerdown", (e) => {
+
+    openFullscreen()
     if (e.screenX < app.renderer.width / 2) {
       bunnyAccelerator.setSpeedX(-2);
     } else {

@@ -5,6 +5,14 @@ import { sound } from "@pixi/sound";
 const app = new Application({ resizeTo: window });
 
 document.body.appendChild(app.view as unknown as Node);
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+}
+toggleFullScreen();
 let speed = 1;
 let bunnyAccelerator: any = null;
 let bg_layer1: any = null;

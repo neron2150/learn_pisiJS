@@ -8,10 +8,14 @@ document.body.appendChild(app.view as unknown as Node);
 
 var elem = app.renderer.view;
 function openFullscreen() {
+  // @ts-ignore
   if (elem?.requestFullscreen) {
+    // @ts-ignore
     elem.requestFullscreen();
+    // @ts-ignore
   } else if (elem?.requestFullscreen) {
     /* Safari */
+    // @ts-ignore
     elem?.requestFullscreen();
   } else if ((elem as any)?.msRequestFullscreen) {
     /* IE11 */
